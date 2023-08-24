@@ -1,23 +1,24 @@
-import { useContext, useEffect, useState } from "react";
-import Card from "../components/Card";
+import React from "react";
 import axios from "axios";
-import AppContext from "../context";
+
+import Card from "../components/Card";
+// import AppContext from "../context";
 
 function Orders() {
-  const { onAddToFavorite, onAddToCart } = useContext(AppContext);
-  const [orders, setOrders] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const { onAddToFavorite, onAddToCart } = React.useContext(AppContext);
+  const [orders, setOrders] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     (async () => {
       try {
-        // const { data } = await axios.get(
-        //   "https://64df954e71c3335b2582d6fd.mockapi.io/orders"
-        // );
-        // setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
+        const { data } = await axios.get(
+          "https://64df954e71c3335b2582d6fd.mockapi.io/orders"
+        );
+        setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);
       } catch (error) {
-        alert("Ошибка при запросе заказов!");
+        alert("Ошибка при запросе заказов");
         console.error(error);
       }
     })();
